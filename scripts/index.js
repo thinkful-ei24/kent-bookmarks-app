@@ -5,7 +5,7 @@ $(function() {
       store.addBookmark(bookmark);
       console.log(store.list);
     });
+    bookmarkList.render();
   });
 
-  bookmarkList.render();
 });

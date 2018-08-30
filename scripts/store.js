@@ -8,7 +8,7 @@ const store = (function() {
     list: [],
     adding: false,
     editing: null,
-    expanded: null,
+    expanded: 'cjlgrh432000g0ky8srp5eruh', // for testing
     filter: 0,
     error: null,
 
