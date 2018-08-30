@@ -20,6 +20,14 @@ const store = (function() {
     this.adding = !this.adding;
   };
 
+  const setEditing = function(id) {
+    this.editing = id;
+  };
+
+  const findBookmark = function(id) {
+    return this.list.find(bookmark => bookmark.id === id);
+  };
+
   const setError = function(errorMessage) {
     this.error = errorMessage;
   };
@@ -37,6 +45,8 @@ const store = (function() {
     changeFilter,
     findAndDelete,
     toggleAdding,
-    setError
+    setEditing,
+    setError,
+    findBookmark
   };
 }());

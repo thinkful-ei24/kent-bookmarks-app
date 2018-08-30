@@ -34,7 +34,14 @@ const bookmarkList = (function() {
   }
 
   function generateHeaderHtml() {
-    return '<h1>Bookmarks</h1>';
+    if (store.adding) {
+      return '<h1>Add Bookmark</h1>';
+    } else if (store.editing) {
+      return '<h1>Edit Bookmark</h1>';
+    } else {
+      return '<h1>Bookmarks</h1>';
+    }
+    
   }
 
   function generateListFormHtml(filter) {
@@ -51,7 +58,7 @@ const bookmarkList = (function() {
     `;
   }
 
-  function generateModifyListHtml() {
+  function generateAddListHtml() {
     return `
       <input type="text" name="title" placeholder="Title">
       <br>
@@ -70,6 +77,27 @@ const bookmarkList = (function() {
     `;
   }
 
+  function generateEditListHtml(editingBookmark) {
+    console.log('ran')
+    return `
+      <input type="text" name="title" placeholder="Title" value="${editingBookmark.title}">
+      <br>
+      <input type="text" name="url" placeholder="Website url" value="${editingBookmark.url}">
+      <br>
+      <label for="rating" class="rating">Ratings</label>
+        <input type="radio" name="rating" value="1" ${editingBookmark.rating === 1 ? 'checked="checked"' : ''}><span class="icon">★</span> 
+        <input type="radio" name="rating" value="2" ${editingBookmark.rating === 2 ? 'checked="checked"' : ''}><span class="icon">★★</span> 
+        <input type="radio" name="rating" value="3" ${editingBookmark.rating === 3 ? 'checked="checked"' : ''}><span class="icon">★★★</span> 
+        <input type="radio" name="rating" value="4" ${editingBookmark.rating === 4 ? 'checked="checked"' : ''}><span class="icon">★★★★</span> 
+        <input type="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span> 
+      <br>
+      <input type="textfield" name="desc" placeholder="Enter a description" value="${editingBookmark.desc}">
+      <br>
+      <button type="submit">Add Bookmark</button>
+    `;
+  }
+
+
   function generateErrorMessageHtml() {
     return store.error;
   }
@@ -83,13 +111,22 @@ const bookmarkList = (function() {
   function render() {
     const headerHtml = generateHeaderHtml();
     const listFormHtml = store.adding || store.editing ? '' : generateListFormHtml(store.filter);
-    const modifyListHtml = store.adding || store.editing  ? generateModifyListHtml() : '';
+
+    let modifyListHtml = '';
+    if (store.adding) {
+      modifyListHtml = generateAddListHtml();
+    } else if (store.editing) {
+      console.log('test');
+      const editingBookmark = store.findBookmark(store.editing);
+      modifyListHtml = generateEditListHtml(editingBookmark);
+    }
+    console.log(modifyListHtml);
 
     const filteredList = store.list.filter(bookmark => bookmark.rating >= store.filter);
     const listHtml = store.adding || store.editing ? '' : filteredList.map(generateBookmarkElement).join('');
     
     $('header').html(headerHtml);
-    $('aside').html('')
+    $('aside').html('');
     $('.options').html(listFormHtml);
     $('.modify-list').html(modifyListHtml);
     $('.bookmark-list').html(listHtml);
@@ -129,19 +166,34 @@ const bookmarkList = (function() {
     });
   }
 
+  function handleEditBookmarkButtonClicked() {
+    $('.bookmark-list').on('click', '.bookmark-edit', function() {
+      const id = $(this).parent().attr('data-id');
+      store.setEditing(id);
+      render();
+    });
+  }
+
+  function displayError(error) {
+    const errorMessage = error.responseJSON.message;
+    store.setError(errorMessage);
+    renderErrorMessage();
+  }
+
   function handleBookmarkSubmitClicked() {
     $('.modify-list').on('submit', function(e) {
       e.preventDefault();
-      const newBookmark = $(this).serializeJson();
-      api.addBookmark(newBookmark, function(response) {
-        store.addBookmark(response);
-        store.toggleAdding();
-        render();
-      }, function(error) {
-        const errorMessage = error.responseJSON.message;
-        store.setError(errorMessage);
-        renderErrorMessage();
-      });
+      if (store.adding) {
+        const newBookmark = $(this).serializeJson();
+        api.addBookmark(newBookmark, function(response) {
+          store.addBookmark(response);
+          store.toggleAdding();
+          render();
+        }, displayError);
+      } else if (store.editing) {
+        const updatedBookmark = $(this).serializeJson();
+        console.log('updating');
+      }
     });
   }
 
@@ -150,6 +202,7 @@ const bookmarkList = (function() {
     handleRatingFilterChange();
     handleRemoveButtonClicked();
     handleAddBookmarkButtonClicked();
+    handleEditBookmarkButtonClicked();
     handleBookmarkSubmitClicked();
   }
 
