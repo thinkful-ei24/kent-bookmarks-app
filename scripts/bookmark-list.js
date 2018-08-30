@@ -81,8 +81,8 @@ const bookmarkList = (function() {
   function handleRemoveButtonClicked() {
     $('.bookmark-list').on('click', '.bookmark-delete', function() {
       const id = $(this).parent().attr('data-id');
-      api.deleteBookmark(id, function(response) {
-        console.log('something happened');
+      api.deleteBookmark(id, function() {
+        store.findAndDelete(id);
         render();
       });
     });

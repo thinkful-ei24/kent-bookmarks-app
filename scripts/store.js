@@ -12,6 +12,10 @@ const store = (function() {
     this.filter = Number(minimumRating);
   };
 
+  const findAndDelete = function(id) {
+    this.list = this.list.filter(bookmark => bookmark.id !== id);
+  };
+
   return {
     list: [],
     adding: false,
@@ -22,6 +26,7 @@ const store = (function() {
 
     addBookmark,
     changeExpanded,
-    changeFilter
+    changeFilter,
+    findAndDelete
   };
 }());
