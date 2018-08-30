@@ -4,14 +4,19 @@ const store = (function() {
     this.list.push(bookmark);
   };
 
+  const changeExpanded = function(id) {
+    this.expanded = id;
+  };
+
   return {
     list: [],
     adding: false,
     editing: null,
-    expanded: 'cjlgrh432000g0ky8srp5eruh', // for testing
+    expanded: null,
     filter: 0,
     error: null,
 
-    addBookmark
+    addBookmark,
+    changeExpanded
   };
 }());

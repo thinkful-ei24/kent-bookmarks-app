@@ -61,7 +61,8 @@ const bookmarkList = (function() {
   function handleListItemClicked() {
     $('.bookmark-list').on('click', '.bookmark-list-item', function() {
       const id = $(this).attr('data-id');
-      console.log(id);
+      store.changeExpanded(id);
+      render();
     });
   }
 
