@@ -78,9 +78,17 @@ const bookmarkList = (function() {
     });
   }
 
+  function handleRemoveButtonClicked() {
+    $('.bookmark-list').on('click', '.bookmark-delete', function() {
+      const id = $(this).parent().attr('data-id');
+      render();
+    });
+  }
+
   function bindEventListeners() {
     handleListItemClicked();
     handleRatingFilterChange();
+    handleRemoveButtonClicked();
   }
 
   return {
