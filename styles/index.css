@@ -16,3 +16,23 @@ meter {
   text-decoration: none;
   color: initial;
 }
+body {
+  width: 100%;
+  margin: 0;
+}
+
+header {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  width: 100%;
+  height: 44px;
+  border-bottom: 1px solid black;
+}
+
+h1 {
+  font-size: 17px;
+  font-weight: 600;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  margin: 0;
+}
