@@ -1,35 +1,54 @@
 /* global store api */
 //eslint-disable-next-line no-unused-vars
 const bookmarkList = (function() {
-  function generateCollapsedBookmarkElement(bookmark) {
+  function generateCollapsedBookmarkElement(bookmark, bookmarkRating) {
     return `
       <li class="bookmark-list-item" data-id="${bookmark.id}">
         <h3 class="bookmark-title">${bookmark.title}</h3>
-        <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmark.rating}</meter>
-        <hr>
+        <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmarkRating}</meter>
       </li>
     `;
   }
 
-  function generateExpandedBookmarkElement(bookmark) {
+  function generateExpandedBookmarkElement(bookmark, bookmarkRating) {
     return `
       <li class="bookmark-list-item" data-id="${bookmark.id}">
         <h3 class="bookmark-title">${bookmark.title}</h3>
-        <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmark.rating}</meter>
+        <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmarkRating}</meter>
         <p class="bookmark-description">${bookmark.desc}</p>
-        <a class="bookmark-visit" href="${bookmark.url}">Visit Website</a>
-        <button class="bookmark-edit">Edit</button>
-        <button class="bookmark-delete">Delete</button>
-        <hr>
+        <div>
+          <a class="bookmark-visit" href="${bookmark.url}">Visit Website</a>
+          <button class="bookmark-edit">Edit</button>
+          <button class="bookmark-delete">Delete</button>
+        </div>
       </li>
     `;
+  }
+
+  function generateBookmarkRatingText(bookmarkRating) {
+    switch (bookmarkRating) {
+    case 5: 
+      return '<span class="orange">★★★★★</span>';
+    case 4:
+      return '<span class="orange">★★★★</span><span class="black">★</span>';
+    case 3: 
+      return '<span class="orange">★★★</span><span class="black">★★</span>';
+    case 2: 
+      return '<span class="orange">★★</span><span class="black">★★★</span>';
+    case 1:
+      return '<span class="orange">★</span><span class="black">★★★★</span>';
+    default:
+      return '<span class="black">★★★★★</span>';
+    }
   }
 
   function generateBookmarkElement(bookmark) {
+    const bookmarkRating = generateBookmarkRatingText(bookmark.rating);
+    
     if (bookmark.id === store.expanded) {
-      return generateExpandedBookmarkElement(bookmark);
+      return generateExpandedBookmarkElement(bookmark, bookmarkRating);
     } else {
-      return generateCollapsedBookmarkElement(bookmark);
+      return generateCollapsedBookmarkElement(bookmark, bookmarkRating);
     }
   }
 
