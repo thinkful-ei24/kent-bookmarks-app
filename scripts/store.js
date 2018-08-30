@@ -20,6 +20,10 @@ const store = (function() {
     this.adding = !this.adding;
   };
 
+  const setError = function(errorMessage) {
+    this.error = errorMessage;
+  };
+
   return {
     list: [],
     adding: false,
@@ -32,6 +36,7 @@ const store = (function() {
     changeExpanded,
     changeFilter,
     findAndDelete,
-    toggleAdding
+    toggleAdding,
+    setError
   };
 }());

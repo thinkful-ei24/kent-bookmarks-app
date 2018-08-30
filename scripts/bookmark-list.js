@@ -126,7 +126,10 @@ const bookmarkList = (function() {
         store.toggleAdding();
         render();
       }, function(error) {
-        console.log(error.responseJSON.message);
+        const errorMessage = error.responseJSON.message;
+        store.setError(errorMessage);
+        console.log(store.error);
+        render();
       });
     });
   }
