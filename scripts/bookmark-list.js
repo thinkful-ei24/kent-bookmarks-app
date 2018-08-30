@@ -120,8 +120,11 @@ const bookmarkList = (function() {
   function handleBookmarkSubmitClicked() {
     $('.modify-list').on('submit', function(e) {
       e.preventDefault();
-      const bookmarkInfo = $(this).serializeJson();
-      console.log(bookmarkInfo);
+      const newBookmark = $(this).serializeJson();
+      api.addBookmark(newBookmark, function(response) {
+        store.toggleAdding();
+        render();
+      });
     });
   }
 

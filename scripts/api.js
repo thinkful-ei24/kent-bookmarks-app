@@ -14,8 +14,19 @@ const api = (function() {
     });
   };
 
+  const addBookmark = function(newBookmark, callback) {
+    $.ajax({
+      url: BASE_URL + '/bookmarks',
+      method: 'POST',
+      contentType: 'application/json',
+      data: newBookmark,
+      success: callback
+    });
+  };
+
   return {
     getBookmarks,
-    deleteBookmark
+    deleteBookmark,
+    addBookmark
   };
 }());
