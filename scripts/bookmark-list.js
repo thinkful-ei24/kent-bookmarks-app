@@ -46,7 +46,7 @@ const bookmarkList = (function() {
 
   function generateListFormHtml(filter) {
     return `
-      <select name="rating-filter" id="rating-filter">
+      <select name="rating-filter" id="rating-filter" class="rating-filter">
         <option value="0" ${filter === 0 ? 'selected="true"' : ''}>Minimum Rating</option>
         <option value="5" ${filter === 5 ? 'selected="true"' : ''}>5</option>
         <option value="4" ${filter === 4 ? 'selected="true"' : ''}>4</option>

@@ -36,3 +36,27 @@ h1 {
   padding-bottom: 13px;
   margin: 0;
 }
+
+.options {
+  display: flex;
+  border-bottom: 1px solid grey;
+}
+
+.rating-filter, .add-bookmark {
+  flex-grow: 1;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 4px 8px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  border-radius: 4px;
+  margin: 16px;  
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.add-bookmark {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
