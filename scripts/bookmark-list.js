@@ -1,4 +1,4 @@
-/* global store */
+/* global store api */
 //eslint-disable-next-line no-unused-vars
 const bookmarkList = (function() {
   function generateCollapsedBookmarkElement(bookmark) {
@@ -81,7 +81,10 @@ const bookmarkList = (function() {
   function handleRemoveButtonClicked() {
     $('.bookmark-list').on('click', '.bookmark-delete', function() {
       const id = $(this).parent().attr('data-id');
-      render();
+      api.deleteBookmark(id, function(response) {
+        console.log('something happened');
+        render();
+      });
     });
   }
 
