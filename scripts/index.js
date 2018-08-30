@@ -1,4 +1,4 @@
-/* global api store */
+/* global api store bookmarkList */
 $(function() {
   api.getBookmarks(response => {
     response.forEach(bookmark => {
@@ -6,4 +6,6 @@ $(function() {
       console.log(store.list);
     });
   });
+
+  bookmarkList.render();
 });
