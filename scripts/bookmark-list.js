@@ -122,6 +122,7 @@ const bookmarkList = (function() {
       e.preventDefault();
       const newBookmark = $(this).serializeJson();
       api.addBookmark(newBookmark, function(response) {
+        store.addBookmark(response);
         store.toggleAdding();
         render();
       });
