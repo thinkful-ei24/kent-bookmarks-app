@@ -16,6 +16,10 @@ const store = (function() {
     this.list = this.list.filter(bookmark => bookmark.id !== id);
   };
 
+  const toggleAdding = function() {
+    this.adding = !this.adding;
+  };
+
   return {
     list: [],
     adding: false,
@@ -27,6 +31,7 @@ const store = (function() {
     addBookmark,
     changeExpanded,
     changeFilter,
-    findAndDelete
+    findAndDelete,
+    toggleAdding
   };
 }());

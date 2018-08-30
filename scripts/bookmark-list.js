@@ -57,12 +57,12 @@ const bookmarkList = (function() {
       <br>
       <input type="text" name="website" placeholder="Website url">
       <br>
-      <label for="rating">Ratings</label>
-      <input type="button" name="one-star">
-      <input type="button" name="two-star">
-      <input type="button" name="three-star">
-      <input type="button" name="four-star">
-      <input type="button" name="five-star">
+      <label for="rating" class="rating">Ratings</label>
+        <input type="radio" name="stars" value="1"><span class="icon">★</span> 
+        <input type="radio" name="stars" value="2"><span class="icon">★★</span> 
+        <input type="radio" name="stars" value="3"><span class="icon">★★★</span> 
+        <input type="radio" name="stars" value="4"><span class="icon">★★★★</span> 
+        <input type="radio" name="stars" value="5"><span class="icon">★★★★★</span> 
       <br>
       <input type="textfield" name="description" placeholder="Enter a description">
       <br>
@@ -112,7 +112,8 @@ const bookmarkList = (function() {
   function handleAddBookmarkButtonClicked() {
     $('.options').on('click', '.add-bookmark', function(e) {
       e.preventDefault();
-      console.log('worked');
+      store.toggleAdding();
+      render();
     });
   }
 
