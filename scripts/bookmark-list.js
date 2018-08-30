@@ -78,7 +78,7 @@ const bookmarkList = (function() {
   }
 
   function generateEditListHtml(editingBookmark) {
-    console.log('ran')
+    console.log('ran');
     return `
       <input type="text" name="title" placeholder="Title" value="${editingBookmark.title}">
       <br>
@@ -93,7 +93,7 @@ const bookmarkList = (function() {
       <br>
       <input type="textfield" name="desc" placeholder="Enter a description" value="${editingBookmark.desc}">
       <br>
-      <button type="submit">Add Bookmark</button>
+      <button type="submit">Edit Bookmark</button>
     `;
   }
 
@@ -192,7 +192,10 @@ const bookmarkList = (function() {
         }, displayError);
       } else if (store.editing) {
         const updatedBookmark = $(this).serializeJson();
-        console.log('updating');
+        api.editBookmark(store.editing, updatedBookmark, function(response){
+          console.log('working up to here');
+          console.log(response);
+        }, displayError);
       }
     });
   }

@@ -25,9 +25,21 @@ const api = (function() {
     });
   };
 
+  const editBookmark = function(id, updatedBookmark, callback, errorCallback) {
+    $.ajax({
+      url: BASE_URL + '/bookmarks/' + id,
+      method: 'PATCH',
+      contentType: 'application/json',
+      data: updatedBookmark,
+      success: callback,
+      error: errorCallback
+    });
+  };
+
   return {
     getBookmarks,
     deleteBookmark,
-    addBookmark
+    addBookmark,
+    editBookmark
   };
 }());
