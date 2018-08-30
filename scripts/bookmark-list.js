@@ -150,7 +150,8 @@ const bookmarkList = (function() {
   }
 
   function handleRemoveButtonClicked() {
-    $('.bookmark-list').on('click', '.bookmark-delete', function() {
+    $('.bookmark-list').on('click', '.bookmark-delete', function(e) {
+      e.stopPropagation();
       const id = $(this).parent().attr('data-id');
       api.deleteBookmark(id, function() {
         store.findAndDelete(id);
@@ -180,7 +181,8 @@ const bookmarkList = (function() {
   }
 
   function handleEditBookmarkButtonClicked() {
-    $('.bookmark-list').on('click', '.bookmark-edit', function() {
+    $('.bookmark-list').on('click', '.bookmark-edit', function(e) {
+      e.stopPropagation();
       const id = $(this).parent().attr('data-id');
       store.setEditing(id);
       render();
