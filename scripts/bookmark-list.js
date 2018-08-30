@@ -65,11 +65,23 @@ const bookmarkList = (function() {
       <input type="text" name="url" placeholder="Website url">
       <br>
       <label for="rating" class="rating">Ratings</label>
-        <input type="radio" name="rating" value="1"><span class="icon">★</span> 
-        <input type="radio" name="rating" value="2"><span class="icon">★★</span> 
-        <input type="radio" name="rating" value="3"><span class="icon">★★★</span> 
-        <input type="radio" name="rating" value="4"><span class="icon">★★★★</span> 
-        <input type="radio" name="rating" value="5"><span class="icon">★★★★★</span> 
+        <div class="rating">
+          <label>
+            <input type="radio" name="rating" value="1"><span class="icon">★</span> 
+          </label>
+          <label>
+            <input type="radio" name="rating" value="2"><span class="icon">★★</span>
+          </label>
+          <label>
+            <input type="radio" name="rating" value="3"><span class="icon">★★★</span>
+          </label>
+          <label>
+            <input type="radio" name="rating" value="4"><span class="icon">★★★★</span>
+          </label>
+          <label>
+            <input type="radio" name="rating" value="5"><span class="icon">★★★★★</span>
+          </label>
+        </div> 
       <br>
       <input type="textfield" name="desc" placeholder="Enter a description">
       <br>
@@ -79,18 +91,29 @@ const bookmarkList = (function() {
   }
 
   function generateEditListHtml(editingBookmark) {
-    console.log('ran');
     return `
       <input type="text" name="title" placeholder="Title" value="${editingBookmark.title}">
       <br>
       <input type="text" name="url" placeholder="Website url" value="${editingBookmark.url}">
       <br>
-      <label for="rating" class="rating">Ratings</label>
-        <input type="radio" name="rating" value="1" ${editingBookmark.rating === 1 ? 'checked="checked"' : ''}><span class="icon">★</span> 
-        <input type="radio" name="rating" value="2" ${editingBookmark.rating === 2 ? 'checked="checked"' : ''}><span class="icon">★★</span> 
-        <input type="radio" name="rating" value="3" ${editingBookmark.rating === 3 ? 'checked="checked"' : ''}><span class="icon">★★★</span> 
-        <input type="radio" name="rating" value="4" ${editingBookmark.rating === 4 ? 'checked="checked"' : ''}><span class="icon">★★★★</span> 
-        <input type="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span> 
+      <label for="rating">Ratings</label>
+      <div class="rating">
+        <label>
+          <input type="radio" name="rating" value="1" ${editingBookmark.rating === 1 ? 'checked="checked"' : ''}><span class="icon">★</span> 
+        </label>
+        <label>
+          <input type="radio" name="rating" value="2" ${editingBookmark.rating === 2 ? 'checked="checked"' : ''}><span class="icon">★★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="3" ${editingBookmark.rating === 3 ? 'checked="checked"' : ''}><span class="icon">★★★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="4" ${editingBookmark.rating === 4 ? 'checked="checked"' : ''}><span class="icon">★★★★</span>
+        </label>
+        <label>
+          <input type="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span>
+        </label>
+      </div>
       <br>
       <input type="textfield" name="desc" placeholder="Enter a description" value="${editingBookmark.desc}">
       <br>
@@ -112,6 +135,7 @@ const bookmarkList = (function() {
   }
 
   function render() {
+    console.log('ran');
     const headerHtml = generateHeaderHtml();
     const listFormHtml = store.adding || store.editing ? '' : generateListFormHtml(store.filter);
 
