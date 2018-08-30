@@ -40,12 +40,12 @@ const bookmarkList = (function() {
   function generateListFormHtml() {
     return `
       <select name="rating-filter" id="rating-filter">
-        <option value="0">Minimum Rating</option>
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
+        <option value="0" ${store.filter === 0 ? 'selected="true"' : ''}>Minimum Rating</option>
+        <option value="5" ${store.filter === 5 ? 'selected="true"' : ''}>5</option>
+        <option value="4" ${store.filter === 4 ? 'selected="true"' : ''}>4</option>
+        <option value="3" ${store.filter === 3 ? 'selected="true"' : ''}>3</option>
+        <option value="2" ${store.filter === 2 ? 'selected="true"' : ''}>2</option>
+        <option value="1" ${store.filter === 1 ? 'selected="true"' : ''}>1</option>
       </select>
       <button>Add Bookmark</button>
     `;
@@ -53,7 +53,10 @@ const bookmarkList = (function() {
   function render() {
     const headerHtml = generateHeaderHtml();
     const listFormHtml = generateListFormHtml();
-    const listHtml = store.list.map(generateBookmarkElement).join('');
+
+    const filteredList = store.list.filter(bookmark => bookmark.rating >= store.filter);
+    const listHtml = filteredList.map(generateBookmarkElement).join('');
+    
     $('header').html(headerHtml);
     $('.options').html(listFormHtml);
     $('.bookmark-list').html(listHtml);
@@ -71,6 +74,7 @@ const bookmarkList = (function() {
     $('.options').on('change', '#rating-filter', function() {
       const selected = $(this).val();
       store.changeFilter(selected);
+      render();
     });
   }
 
