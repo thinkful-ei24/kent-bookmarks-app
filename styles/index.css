@@ -87,3 +87,48 @@ h1 {
 .black {
   color: #000;
 }
+
+.bookmark-description {
+  color: #000;
+  font-size: 14px;
+}
+
+.bookmark-buttons {
+  display: flex;
+}
+
+.bookmark-visit, 
+.bookmark-edit, 
+.bookmark-delete {
+  font-family: "Roboto", sans-serif;
+  flex-grow: 1;
+  font-size: 14px;
+  font-weight: 400;
+  flex-basis: 100px;
+  padding: 4px 8px;
+  margin-bottom: 0;
+  vertical-align: middle;
+  border-radius: 4px;
+  text-align: center;
+  border: 1px solid transparent;
+}
+
+.bookmark-visit {
+  margin-right: 4px;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+}
+
+.bookmark-edit {
+  margin-left: 4px;
+  margin-right: 4px;
+  color: #000;
+  background-color: lightgrey;
+}
+
+.bookmark-delete {
+  margin-left: 4px;
+  color: #fff;
+  background-color: red;
+}

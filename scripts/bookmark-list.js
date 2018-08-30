@@ -16,7 +16,7 @@ const bookmarkList = (function() {
         <h3 class="bookmark-title">${bookmark.title}</h3>
         <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmarkRating}</meter>
         <p class="bookmark-description">${bookmark.desc}</p>
-        <div>
+        <div class="bookmark-buttons">
           <a class="bookmark-visit" href="${bookmark.url}">Visit Website</a>
           <button class="bookmark-edit">Edit</button>
           <button class="bookmark-delete">Delete</button>
