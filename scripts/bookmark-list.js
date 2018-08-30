@@ -70,7 +70,7 @@ const bookmarkList = (function() {
   function handleRatingFilterChange() {
     $('.options').on('change', '#rating-filter', function() {
       const selected = $(this).val();
-      console.log(selected);
+      store.changeFilter(selected);
     });
   }
 

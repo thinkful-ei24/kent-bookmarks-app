@@ -8,6 +8,10 @@ const store = (function() {
     this.expanded = id;
   };
 
+  const changeFilter = function(minimumRating) {
+    this.filter = Number(minimumRating);
+  };
+
   return {
     list: [],
     adding: false,
@@ -17,6 +21,7 @@ const store = (function() {
     error: null,
 
     addBookmark,
-    changeExpanded
+    changeExpanded,
+    changeFilter
   };
 }());
