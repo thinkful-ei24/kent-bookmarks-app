@@ -3,7 +3,7 @@
 const bookmarkList = (function() {
   function generateCollapsedBookmarkElement(bookmark) {
     return `
-      <li data-id="${bookmark.id}">
+      <li class="bookmark-list-item" data-id="${bookmark.id}">
         <h3 class="bookmark-title">${bookmark.title}</h3>
         <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmark.rating}</meter>
         <hr>
@@ -13,7 +13,7 @@ const bookmarkList = (function() {
 
   function generateExpandedBookmarkElement(bookmark) {
     return `
-      <li data-id="${bookmark.id}">
+      <li class="bookmark-list-item" data-id="${bookmark.id}">
         <h3 class="bookmark-title">${bookmark.title}</h3>
         <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmark.rating}</meter>
         <p class="bookmark-description">${bookmark.desc}</p>
@@ -58,7 +58,19 @@ const bookmarkList = (function() {
     $('.bookmark-list').html(listHtml);
   }
 
+  function handleListItemClicked() {
+    $('.bookmark-list').on('click', '.bookmark-list-item', function() {
+      const id = $(this).attr('data-id');
+      console.log(id);
+    });
+  }
+
+  function bindEventListeners() {
+    handleListItemClicked();
+  }
+
   return {
-    render
+    render,
+    bindEventListeners
   };
 }());
