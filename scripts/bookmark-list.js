@@ -40,11 +40,12 @@ const bookmarkList = (function() {
   function generateListFormHtml() {
     return `
       <select name="rating-filter" id="rating-filter">
-        <option value="five-stars">5</option>
-        <option value="four-stars">4</option>
-        <option value="three-stars">3</option>
-        <option value="two-stars">2</option>
-        <option value="one-star">1</option>
+        <option value="0">Minimum Rating</option>
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
       </select>
       <button>Add Bookmark</button>
     `;
@@ -66,8 +67,16 @@ const bookmarkList = (function() {
     });
   }
 
+  function handleRatingFilterChange() {
+    $('.options').on('change', '#rating-filter', function() {
+      const selected = $(this).val();
+      console.log(selected);
+    });
+  }
+
   function bindEventListeners() {
     handleListItemClicked();
+    handleRatingFilterChange();
   }
 
   return {
