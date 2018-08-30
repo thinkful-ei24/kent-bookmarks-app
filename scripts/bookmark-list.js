@@ -66,7 +66,7 @@ const bookmarkList = (function() {
       <br>
       <input type="textfield" name="desc" placeholder="Enter a description">
       <br>
-      <button type="submit">Add/Edit Bookmark</button>
+      <button type="submit">Add Bookmark</button>
     `;
   }
   function render() {
@@ -125,6 +125,8 @@ const bookmarkList = (function() {
         store.addBookmark(response);
         store.toggleAdding();
         render();
+      }, function(error) {
+        console.log(error.responseJSON.message);
       });
     });
   }
