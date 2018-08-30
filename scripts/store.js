@@ -5,7 +5,11 @@ const store = (function() {
   };
 
   const changeExpanded = function(id) {
-    this.expanded = id;
+    if (this.expanded === id) {
+      this.expanded = null;
+    } else {
+      this.expanded = id;
+    }
   };
 
   const changeFilter = function(minimumRating) {
@@ -32,6 +36,19 @@ const store = (function() {
     this.error = errorMessage;
   };
 
+  const resetError = function() {
+    this.error = null;
+  };
+
+  const findAndEdit = function(id, newProperties) {
+    const oldBookmark = this.findBookmark(id);
+    Object.assign(oldBookmark, newProperties);
+  };
+
+  const clearEditing = function() {
+    this.editing = null;
+  };
+
   return {
     list: [],
     adding: false,
@@ -47,6 +64,9 @@ const store = (function() {
     toggleAdding,
     setEditing,
     setError,
-    findBookmark
+    resetError,
+    findBookmark,
+    findAndEdit,
+    clearEditing
   };
 }());

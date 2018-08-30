@@ -74,6 +74,7 @@ const bookmarkList = (function() {
       <input type="textfield" name="desc" placeholder="Enter a description">
       <br>
       <button type="submit">Add Bookmark</button>
+      <button type="button" id="cancel">Cancel</button>
     `;
   }
 
@@ -94,6 +95,8 @@ const bookmarkList = (function() {
       <input type="textfield" name="desc" placeholder="Enter a description" value="${editingBookmark.desc}">
       <br>
       <button type="submit">Edit Bookmark</button>
+      <button type="button" id="cancel">Cancel</button>
+      <button type="button" id="delete">Delete</button>
     `;
   }
 
@@ -104,7 +107,7 @@ const bookmarkList = (function() {
 
   function renderErrorMessage() {
     const errorMessageHtml = generateErrorMessageHtml();
-    store.error = null;
+    store.resetError();
     $('aside').html(errorMessageHtml);
   }
 
@@ -116,11 +119,9 @@ const bookmarkList = (function() {
     if (store.adding) {
       modifyListHtml = generateAddListHtml();
     } else if (store.editing) {
-      console.log('test');
       const editingBookmark = store.findBookmark(store.editing);
       modifyListHtml = generateEditListHtml(editingBookmark);
     }
-    console.log(modifyListHtml);
 
     const filteredList = store.list.filter(bookmark => bookmark.rating >= store.filter);
     const listHtml = store.adding || store.editing ? '' : filteredList.map(generateBookmarkElement).join('');
@@ -158,6 +159,18 @@ const bookmarkList = (function() {
     });
   }
 
+
+  function handleDeleteButtonOnEditScreenClicked() {
+    $('.modify-list').on('click', '#delete', function() {
+      const id = store.editing;
+      store.clearEditing();
+      api.deleteBookmark(id, function() {
+        store.findAndDelete(id);
+        render();
+      });
+    });
+  }
+
   function handleAddBookmarkButtonClicked() {
     $('.options').on('click', '.add-bookmark', function(e) {
       e.preventDefault();
@@ -170,6 +183,14 @@ const bookmarkList = (function() {
     $('.bookmark-list').on('click', '.bookmark-edit', function() {
       const id = $(this).parent().attr('data-id');
       store.setEditing(id);
+      render();
+    });
+  }
+
+  function handleCancelButtonClicked() {
+    $('.modify-list').on('click', '#cancel', function() {
+      if (store.editing) store.clearEditing();
+      if (store.adding) store.toggleAdding();
       render();
     });
   }
@@ -192,9 +213,10 @@ const bookmarkList = (function() {
         }, displayError);
       } else if (store.editing) {
         const updatedBookmark = $(this).serializeJson();
-        api.editBookmark(store.editing, updatedBookmark, function(response){
-          console.log('working up to here');
-          console.log(response);
+        api.editBookmark(store.editing, updatedBookmark, function(){
+          store.findAndEdit(store.editing, JSON.parse(updatedBookmark));
+          store.clearEditing();
+          render();
         }, displayError);
       }
     });
@@ -207,6 +229,8 @@ const bookmarkList = (function() {
     handleAddBookmarkButtonClicked();
     handleEditBookmarkButtonClicked();
     handleBookmarkSubmitClicked();
+    handleDeleteButtonOnEditScreenClicked();
+    handleCancelButtonClicked();
   }
 
   return {
