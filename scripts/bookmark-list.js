@@ -69,6 +69,17 @@ const bookmarkList = (function() {
       <button type="submit">Add Bookmark</button>
     `;
   }
+
+  function generateErrorMessageHtml() {
+    return store.error;
+  }
+
+  function renderErrorMessage() {
+    const errorMessageHtml = generateErrorMessageHtml();
+    store.error = null;
+    $('aside').html(errorMessageHtml);
+  }
+
   function render() {
     const headerHtml = generateHeaderHtml();
     const listFormHtml = store.adding || store.editing ? '' : generateListFormHtml(store.filter);
@@ -78,6 +89,7 @@ const bookmarkList = (function() {
     const listHtml = store.adding || store.editing ? '' : filteredList.map(generateBookmarkElement).join('');
     
     $('header').html(headerHtml);
+    $('aside').html('')
     $('.options').html(listFormHtml);
     $('.modify-list').html(modifyListHtml);
     $('.bookmark-list').html(listHtml);
@@ -128,8 +140,7 @@ const bookmarkList = (function() {
       }, function(error) {
         const errorMessage = error.responseJSON.message;
         store.setError(errorMessage);
-        console.log(store.error);
-        render();
+        renderErrorMessage();
       });
     });
   }
