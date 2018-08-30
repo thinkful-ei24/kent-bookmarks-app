@@ -55,16 +55,16 @@ const bookmarkList = (function() {
     return `
       <input type="text" name="title" placeholder="Title">
       <br>
-      <input type="text" name="website" placeholder="Website url">
+      <input type="text" name="url" placeholder="Website url">
       <br>
       <label for="rating" class="rating">Ratings</label>
-        <input type="radio" name="stars" value="1"><span class="icon">★</span> 
-        <input type="radio" name="stars" value="2"><span class="icon">★★</span> 
-        <input type="radio" name="stars" value="3"><span class="icon">★★★</span> 
-        <input type="radio" name="stars" value="4"><span class="icon">★★★★</span> 
-        <input type="radio" name="stars" value="5"><span class="icon">★★★★★</span> 
+        <input type="radio" name="rating" value="1"><span class="icon">★</span> 
+        <input type="radio" name="rating" value="2"><span class="icon">★★</span> 
+        <input type="radio" name="rating" value="3"><span class="icon">★★★</span> 
+        <input type="radio" name="rating" value="4"><span class="icon">★★★★</span> 
+        <input type="radio" name="rating" value="5"><span class="icon">★★★★★</span> 
       <br>
-      <input type="textfield" name="description" placeholder="Enter a description">
+      <input type="textfield" name="desc" placeholder="Enter a description">
       <br>
       <button type="submit">Add/Edit Bookmark</button>
     `;
@@ -117,11 +117,20 @@ const bookmarkList = (function() {
     });
   }
 
+  function handleBookmarkSubmitClicked() {
+    $('.modify-list').on('submit', function(e) {
+      e.preventDefault();
+      const bookmarkInfo = $(this).serializeJson();
+      console.log(bookmarkInfo);
+    });
+  }
+
   function bindEventListeners() {
     handleListItemClicked();
     handleRatingFilterChange();
     handleRemoveButtonClicked();
     handleAddBookmarkButtonClicked();
+    handleBookmarkSubmitClicked();
   }
 
   return {
