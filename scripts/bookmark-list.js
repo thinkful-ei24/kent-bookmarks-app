@@ -16,8 +16,8 @@ const bookmarkList = (function() {
         <h2 class="bookmark-title">${bookmark.title}</h2>
         <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmarkRating}</meter>
         <p class="bookmark-description">${bookmark.desc}</p>
+        <p>Visit Website: <a class="bookmark-visit" aria-label="Visit Website" href="${bookmark.url}">${bookmark.url}</a></p>
         <div class="bookmark-buttons">
-          <a class="bookmark-visit" href="${bookmark.url}">Visit Website</a>
           <button class="bookmark-edit">Edit</button>
           <button class="bookmark-delete">Delete</button>
         </div>
@@ -80,31 +80,30 @@ const bookmarkList = (function() {
 
   function generateAddListHtml() {
     return `
-      <input type="text" name="title" placeholder="Title">
-      <br>
-      <input type="text" name="url" placeholder="Website url">
-      <br>
-      <label for="rating" class="rating">Ratings</label>
-        <div class="rating">
-          <label>
-            <input type="radio" name="rating" value="1"><span class="icon">★</span> 
-          </label>
-          <label>
-            <input type="radio" name="rating" value="2"><span class="icon">★★</span>
-          </label>
-          <label>
-            <input type="radio" name="rating" value="3"><span class="icon">★★★</span>
-          </label>
-          <label>
-            <input type="radio" name="rating" value="4"><span class="icon">★★★★</span>
-          </label>
-          <label>
-            <input type="radio" name="rating" value="5"><span class="icon">★★★★★</span>
-          </label>
-        </div> 
-      <br>
-      <input type="textfield" name="desc" placeholder="Enter a description">
-      <br>
+      <label for="bookmark-title">Title</label>
+      <input type="text" name="title" aria-label="bookmark-title" placeholder="Title">
+      <label for="bookmark-url">Url</label>
+      <input type="text" name="url" aria-label="bookmark-url" placeholder="Website url">
+      <label for="rating" id="rating" class="rating">Ratings</label>
+      <div class="rating" role="radiogroup" aria-labelledby="rating">
+        <label>
+          <input type="radio" role="radio" name="rating" value="1"><span class="icon">★</span> 
+        </label>
+        <label>
+          <input type="radio" role="radio" name="rating" value="2"><span class="icon">★★</span>
+        </label>
+        <label>
+          <input type="radio" role="radio" name="rating" value="3"><span class="icon">★★★</span>
+        </label>
+        <label>
+          <input type="radio" role="radio" name="rating" value="4"><span class="icon">★★★★</span>
+        </label>
+        <label>
+          <input type="radio" role="radio" name="rating" value="5"><span class="icon">★★★★★</span>
+        </label>
+      </div> 
+      <label for="bookmark-description">Description</label>
+      <input type="textfield" name="desc"  aria-label="bookmark-description" placeholder="Enter a description">
       <button type="submit">Add Bookmark</button>
       <button type="button" id="cancel">Cancel</button>
     `;
@@ -112,31 +111,31 @@ const bookmarkList = (function() {
 
   function generateEditListHtml(editingBookmark) {
     return `
-      <input type="text" name="title" placeholder="Title" value="${editingBookmark.title}">
-      <br>
-      <input type="text" name="url" placeholder="Website url" value="${editingBookmark.url}">
-      <br>
+      <label for="bookmark-title">Title</label>
+      <input type="text" name="title" aria-label="bookmark-title" placeholder="Title" value="${editingBookmark.title}">
+      <label for="bookmark-url">Url</label>
+      <input type="text" name="url" aria-label="bookmark-url" placeholder="Website url" value="${editingBookmark.url}">
       <label for="rating">Ratings</label>
-      <div class="rating">
+      <label for="rating" id="rating" class="rating">Ratings</label>
+      <div class="rating" role="radiogroup" aria-labelledby="rating">
         <label>
-          <input type="radio" name="rating" value="1" ${editingBookmark.rating === 1 ? 'checked="checked"' : ''}><span class="icon">★</span> 
+          <input type="radio" role="radio" name="rating" value="1" ${editingBookmark.rating === 1 ? 'checked="checked"' : ''}><span class="icon">★</span> 
         </label>
         <label>
-          <input type="radio" name="rating" value="2" ${editingBookmark.rating === 2 ? 'checked="checked"' : ''}><span class="icon">★★</span>
+          <input type="radio" role="radio" name="rating" value="2" ${editingBookmark.rating === 2 ? 'checked="checked"' : ''}><span class="icon">★★</span>
         </label>
         <label>
-          <input type="radio" name="rating" value="3" ${editingBookmark.rating === 3 ? 'checked="checked"' : ''}><span class="icon">★★★</span>
+          <input type="radio" role="radio" name="rating" value="3" ${editingBookmark.rating === 3 ? 'checked="checked"' : ''}><span class="icon">★★★</span>
         </label>
         <label>
-          <input type="radio" name="rating" value="4" ${editingBookmark.rating === 4 ? 'checked="checked"' : ''}><span class="icon">★★★★</span>
+          <input type="radio" role="radio" name="rating" value="4" ${editingBookmark.rating === 4 ? 'checked="checked"' : ''}><span class="icon">★★★★</span>
         </label>
         <label>
-          <input type="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span>
+          <input type="radio" role="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span>
         </label>
       </div>
-      <br>
-      <input type="textfield" name="desc" placeholder="Enter a description" value="${editingBookmark.desc}">
-      <br>
+      <label for="bookmark-description">Description</label>
+      <input type="textfield" name="desc"  aria-label="bookmark-description" placeholder="Enter a description" value="${editingBookmark.desc}">
       <button type="submit">Edit Bookmark</button>
       <button type="button" id="cancel">Cancel</button>
       <button type="button" id="delete">Delete</button>
@@ -145,7 +144,7 @@ const bookmarkList = (function() {
 
 
   function generateErrorMessageHtml() {
-    return store.error;
+    return `<h2>${store.error}</h2>`;
   }
 
   function render() {
