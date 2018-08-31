@@ -20,7 +20,7 @@ const bookmarkList = (function() {
       <li class="bookmark-list-item" data-id="${bookmark.id}">
         <a href="#" role="button">
           <h2 class="bookmark-title">${bookmark.title}</h2>
-          <span class="bookmark-rating" aria-label="${bookmark.rating} star rating" >${bookmarkRating}</span>
+          <span class="bookmark-rating" aria-label="${bookmark.rating} star rating">${bookmarkRating}</span>
           ${expanded}
         </a>
       </li>
@@ -142,7 +142,6 @@ const bookmarkList = (function() {
   }
 
   function render() {
-    console.log('ran');
     const headerHtml = generateHeaderHtml();
     const listFormHtml = store.adding || store.editing ? '' : generateListFormHtml(store.filter);
     const errorMessageHtml = store.error ? generateErrorMessageHtml() : '';

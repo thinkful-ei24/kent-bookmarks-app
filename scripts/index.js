@@ -4,7 +4,6 @@ $(function() {
     response.forEach(bookmark => {
       store.addBookmark(bookmark);
     });
-    console.log(store.list);
     bookmarkList.render();
   });
   bookmarkList.bindEventListeners();
