@@ -74,8 +74,8 @@ const bookmarkList = (function() {
     return `
       <label for="bookmark-title" class="hidden">Title</label>
       <input type="text" name="title" class="short-textfield" aria-label="bookmark-title" placeholder="Title">
-      <label for="bookmark-url" class="hidden">Url</label>
-      <input type="text" class="short-textfield" name="url" aria-label="bookmark-url" placeholder="Website url">
+      <label for="bookmark-url" class="hidden">Enter an https:// URL:</label>
+      <input type="url" class="short-textfield" name="url" aria-label="bookmark-url" placeholder="Website url">
       <div class=rating-input>
         <label for="rating" id="rating" class="rating hidden">Ratings</label>
         <div class="rating" role="radiogroup" aria-labelledby="rating">
@@ -107,8 +107,8 @@ const bookmarkList = (function() {
     return `
       <label for="bookmark-title" class="hidden">Title</label>
       <input type="text" class="short-textfield" name="title" aria-label="bookmark-title" placeholder="Title" value="${editingBookmark.title}">
-      <label for="bookmark-url" class="hidden">Url</label>
-      <input type="text" class="short-textfield" name="url" aria-label="bookmark-url" placeholder="Website url" value="${editingBookmark.url}">
+      <label for="bookmark-url" class="hidden">Enter an https:// URL:</label>
+      <input type="url" class="short-textfield" name="url" aria-label="bookmark-url" placeholder="Website url" value="${editingBookmark.url}">
       <div class=rating-input>
         <label for="rating" id="rating" class="rating hidden">Ratings</label>
         <div class="rating" role="radiogroup" aria-labelledby="rating">
@@ -145,7 +145,6 @@ const bookmarkList = (function() {
     const headerHtml = generateHeaderHtml();
     const listFormHtml = store.adding || store.editing ? '' : generateListFormHtml(store.filter);
     const errorMessageHtml = store.error ? generateErrorMessageHtml() : '';
-    $('aside').html(errorMessageHtml);
 
     let modifyListHtml = '';
     if (store.adding) {
