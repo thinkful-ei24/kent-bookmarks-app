@@ -58,12 +58,12 @@ const bookmarkList = (function() {
     return `
       <label for="rating-filter" name="rating-filter" class="hidden">Rating filter</label>
       <select name="rating-filter" id="rating-filter" class="rating-filter">
-        <option value="0" ${filter === 0 ? 'selected="true"' : ''}>Minimum Rating</option>
+        <option value="0"  aria-label="Select minimum rating" ${filter === 0 ? 'selected="true"' : ''}>Minimum Rating</option>
         <option value="5" aria-label="5 stars only" ${filter === 5 ? 'selected="true"' : ''}>★★★★★</option>
         <option value="4" aria-label="4 stars and up" ${filter === 4 ? 'selected="true"' : ''}>★★★★☆ & up</option>
         <option value="3" aria-label="3 stars and up" ${filter === 3 ? 'selected="true"' : ''}>★★★☆☆ & up</option>
         <option value="2" aria-label="2 stars and up" ${filter === 2 ? 'selected="true"' : ''}>★★☆☆☆ & up</option>
-        <option value="1" aria-label="1 stars and up" ${filter === 1 ? 'selected="true"' : ''}>★☆☆☆☆ & up</option>
+        <option value="1" aria-label="1 star and up" ${filter === 1 ? 'selected="true"' : ''}>★☆☆☆☆ & up</option>
       </select>
       
       <button class="add-bookmark">Add Bookmark</button>
