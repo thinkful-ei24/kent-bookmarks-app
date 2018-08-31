@@ -8,7 +8,7 @@ const bookmarkList = (function() {
     if (bookmark.id === store.expanded) {
       expanded =`
         <p class="bookmark-description">${bookmark.desc}</p>
-        <p>Visit Website: <a class="bookmark-visit" aria-label="Visit Website" href="${bookmark.url}">${bookmark.url}</a></p>
+        <a class="bookmark-visit" aria-label="Visit Website" href="${bookmark.url}">Visit Website: ${bookmark.url}</a>
         <div class="bookmark-buttons">
           <button class="bookmark-edit">Edit</button>
           <button class="bookmark-delete">Delete</button>
@@ -17,10 +17,12 @@ const bookmarkList = (function() {
     }
 
     return `
-      <li class="bookmark-list-item" tabindex="0" role="button" data-id="${bookmark.id}">
-        <h2 class="bookmark-title">${bookmark.title}</h2>
-        <span class="bookmark-rating">${bookmarkRating}</span>
-        ${expanded}
+      <li class="bookmark-list-item" data-id="${bookmark.id}">
+        <a href="#">
+          <h2 class="bookmark-title">${bookmark.title}</h2>
+          <span class="bookmark-rating">${bookmarkRating}</span>
+          ${expanded}
+        </a>
       </li>
     `;
   }
@@ -57,7 +59,7 @@ const bookmarkList = (function() {
       <label for="rating-filter" name="minimum rating" class="hidden">Rating filter</label>
       <select name="rating-filter" id="rating-filter" class="rating-filter">
         <option value="0" ${filter === 0 ? 'selected="true"' : ''}>Minimum Rating</option>
-        <option value="5" ${filter === 5 ? 'selected="true"' : ''}>★★★★★</option>
+        <option value="5" aria-label="5 stars only" ${filter === 5 ? 'selected="true"' : ''}>★★★★★</option>
         <option value="4" ${filter === 4 ? 'selected="true"' : ''}>★★★★☆ & up</option>
         <option value="3" ${filter === 3 ? 'selected="true"' : ''}>★★★☆☆ & up</option>
         <option value="2" ${filter === 2 ? 'selected="true"' : ''}>★★☆☆☆ & up</option>
@@ -167,7 +169,8 @@ const bookmarkList = (function() {
   }
 
   function handleListItemClicked() {
-    $('.bookmark-list').on('click', '.bookmark-list-item', function() {
+    $('.bookmark-list').on('click ', '.bookmark-list-item', function(e) {
+      e.preventDefault();
       const id = $(this).attr('data-id');
       store.changeExpanded(id);
       render();
@@ -225,6 +228,12 @@ const bookmarkList = (function() {
     });
   }
 
+  function handleVisitWebsiteClicked() {
+    $('.bookmark-list').on('click', '.bookmark-visit', function(e) {
+      e.stopPropagation();
+    });
+  }
+
   function handleCancelButtonClicked() {
     $('.modify-list').on('click', '#cancel', function() {
       if (store.editing) store.clearEditing();
@@ -275,6 +284,7 @@ const bookmarkList = (function() {
     handleBookmarkSubmitClicked();
     handleDeleteButtonOnEditScreenClicked();
     handleCancelButtonClicked();
+    handleVisitWebsiteClicked();
   }
 
   return {
