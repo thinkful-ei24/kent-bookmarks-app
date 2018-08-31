@@ -138,7 +138,19 @@ const bookmarkList = (function() {
   }
 
   function generateErrorMessageHtml() {
-    return `<h2 class="error-message">${store.error}</h2>`;
+    let pageName = '';
+    if (store.adding) {
+      pageName = 'Add bookmark page';
+    } else if (store.editing) {
+      pageName = 'Edit bookmark page';
+    } else {
+      pageName = 'Bookmark list page';
+    }
+
+    return `
+      <div class="hidden">${pageName}</div>
+      <h2 class="error-message">${store.error}</h2>
+    `;
   }
 
   function render() {
