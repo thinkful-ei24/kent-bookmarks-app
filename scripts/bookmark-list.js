@@ -212,6 +212,7 @@ const bookmarkList = (function() {
     $('.options').on('click', '.add-bookmark', function(e) {
       e.preventDefault();
       store.toggleAdding();
+      store.changeExpanded(null);
       store.resetError();
       render();
     });
@@ -222,6 +223,7 @@ const bookmarkList = (function() {
       e.stopPropagation();
       const id = $(this).closest('.bookmark-list-item').attr('data-id');
       store.setEditing(id);
+      store.changeExpanded(null);
       store.resetError();
       render();
     });
