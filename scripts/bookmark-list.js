@@ -148,14 +148,14 @@ const bookmarkList = (function() {
     }
 
     let errorMessage = '';
-    if (store.error) errorMessage = `<h2 class="error-message">${store.error}</h2>`;
+    if (store.error) errorMessage = `<p class="error-message">${store.error}</p>`;
     
     let successMessage = '';
-    if (store.success) successMessage = `<div class="hidden">${store.success}</div>`;
+    if (store.success) successMessage = `<p class="hidden">${store.success}</p>`;
     return `
       ${errorMessage}
       ${successMessage}
-      <div class="hidden">${pageName}</div>
+      <p class="hidden">${pageName}</p>
     `;
   }
 
