@@ -18,7 +18,7 @@ const bookmarkList = (function() {
 
     return `
       <li class="bookmark-list-item" data-id="${bookmark.id}">
-        <a href="#">
+        <a href="#" role="button">
           <h2 class="bookmark-title">${bookmark.title}</h2>
           <span class="bookmark-rating">${bookmarkRating}</span>
           ${expanded}
