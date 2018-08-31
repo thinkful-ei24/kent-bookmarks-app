@@ -63,6 +63,7 @@ h1 {
 .rating-filter {
   color: #000;
   background-color: lightgrey;
+  border: 1px solid #000;
 }
 
 .hidden {
