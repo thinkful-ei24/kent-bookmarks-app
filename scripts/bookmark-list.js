@@ -137,7 +137,7 @@ const bookmarkList = (function() {
     `;
   }
 
-  function generateErrorMessageHtml() {
+  function generateAlertMessageHtml() {
     let pageName = '';
     if (store.adding) {
       pageName = 'Add bookmark page';
@@ -147,16 +147,19 @@ const bookmarkList = (function() {
       pageName = 'Bookmark list page';
     }
 
+    let errorMessage = '';
+    if (store.error) errorMessage = `<h2 class="error-message">${store.error}</h2>`;
+    
     return `
+      ${errorMessage}
       <div class="hidden">${pageName}</div>
-      <h2 class="error-message">${store.error}</h2>
     `;
   }
 
   function render() {
     const headerHtml = generateHeaderHtml();
     const listFormHtml = store.adding || store.editing ? '' : generateListFormHtml(store.filter);
-    const errorMessageHtml = store.error ? generateErrorMessageHtml() : '';
+    const alertMessageHtml = generateAlertMessageHtml();
 
     let modifyListHtml = '';
     if (store.adding) {
@@ -170,7 +173,7 @@ const bookmarkList = (function() {
     const listHtml = store.adding || store.editing ? '' : filteredList.map(generateBookmarkElement).join('');
 
     $('header').html(headerHtml);
-    $('aside').html(errorMessageHtml);
+    $('aside').html(alertMessageHtml);
     $('.options').html(listFormHtml);
     $('.bookmark-list').html(listHtml);
     if (!store.error) {
