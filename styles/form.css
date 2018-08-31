@@ -60,3 +60,16 @@
   color: black;
   text-shadow: 0 0 5px #d43900;
 }
+
+aside {
+  margin: 0px;
+  color: #fff;
+  background-color: #d43900;
+  text-align: center;
+}
+
+.error-message {
+  font-size: 16px;
+  margin: 0px;
+  padding: 13px;
+}

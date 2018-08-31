@@ -144,7 +144,7 @@ const bookmarkList = (function() {
 
 
   function generateErrorMessageHtml() {
-    return `<h2>${store.error}</h2>`;
+    return `<h2 class="error-message">${store.error}</h2>`;
   }
 
   function render() {
