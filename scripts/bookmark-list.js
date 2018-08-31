@@ -67,11 +67,11 @@ const bookmarkList = (function() {
       <label for="rating-filter" name="minimum rating" class="hidden">Rating filter</label>
       <select name="rating-filter" id="rating-filter" class="rating-filter">
         <option value="0" ${filter === 0 ? 'selected="true"' : ''}>Minimum Rating</option>
-        <option value="5" ${filter === 5 ? 'selected="true"' : ''}>5</option>
-        <option value="4" ${filter === 4 ? 'selected="true"' : ''}>4</option>
-        <option value="3" ${filter === 3 ? 'selected="true"' : ''}>3</option>
-        <option value="2" ${filter === 2 ? 'selected="true"' : ''}>2</option>
-        <option value="1" ${filter === 1 ? 'selected="true"' : ''}>1</option>
+        <option value="5" ${filter === 5 ? 'selected="true"' : ''}>At least ★★★★★</option>
+        <option value="4" ${filter === 4 ? 'selected="true"' : ''}>At least ★★★★☆</option>
+        <option value="3" ${filter === 3 ? 'selected="true"' : ''}>At least ★★★☆☆</option>
+        <option value="2" ${filter === 2 ? 'selected="true"' : ''}>At least ★★☆☆☆</option>
+        <option value="1" ${filter === 1 ? 'selected="true"' : ''}>At least ★☆☆☆☆</option>
       </select>
       
       <button class="add-bookmark">Add Bookmark</button>

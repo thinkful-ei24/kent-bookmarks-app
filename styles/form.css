@@ -74,10 +74,6 @@ aside {
   padding: 13px;
 }
 
-.modify-list {
-  box-sizing: content-box;
-}
-
 .short-textfield[name="title"] {
   margin-top: 24px;
 }
@@ -90,6 +86,8 @@ aside {
   font-size: 17px;
   width: calc(100% - 48px);
   margin-bottom: 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,.15);
 }
 
 .short-textfield {
@@ -99,7 +97,6 @@ aside {
   background-color: #fff;
   height: 43px;
   background-clip: padding-box;
-  border: 1px solid rgba(0,0,0,.15);
 }
 
 .rating-input {
