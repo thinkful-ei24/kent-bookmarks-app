@@ -4,7 +4,7 @@ const bookmarkList = (function() {
   function generateCollapsedBookmarkElement(bookmark, bookmarkRating) {
     return `
       <li class="bookmark-list-item" data-id="${bookmark.id}">
-        <h3 class="bookmark-title">${bookmark.title}</h3>
+        <h2 class="bookmark-title">${bookmark.title}</h2>
         <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmarkRating}</meter>
       </li>
     `;
@@ -13,7 +13,7 @@ const bookmarkList = (function() {
   function generateExpandedBookmarkElement(bookmark, bookmarkRating) {
     return `
       <li class="bookmark-list-item" data-id="${bookmark.id}">
-        <h3 class="bookmark-title">${bookmark.title}</h3>
+        <h2 class="bookmark-title">${bookmark.title}</h2>
         <meter value="${bookmark.rating}" min="0" max="5" class="bookmark-rating">${bookmarkRating}</meter>
         <p class="bookmark-description">${bookmark.desc}</p>
         <div class="bookmark-buttons">
@@ -27,18 +27,18 @@ const bookmarkList = (function() {
 
   function generateBookmarkRatingText(bookmarkRating) {
     switch (bookmarkRating) {
-    case 5: 
-      return '<span class="orange">★★★★★</span>';
-    case 4:
-      return '<span class="orange">★★★★</span><span class="black">★</span>';
-    case 3: 
-      return '<span class="orange">★★★</span><span class="black">★★</span>';
-    case 2: 
-      return '<span class="orange">★★</span><span class="black">★★★</span>';
-    case 1:
-      return '<span class="orange">★</span><span class="black">★★★★</span>';
-    default:
-      return '<span class="black">★★★★★</span>';
+      case 5: 
+        return '<span class="orange">★★★★★</span>';
+      case 4:
+        return '<span class="orange">★★★★</span><span class="black">★</span>';
+      case 3: 
+        return '<span class="orange">★★★</span><span class="black">★★</span>';
+      case 2: 
+        return '<span class="orange">★★</span><span class="black">★★★</span>';
+      case 1:
+        return '<span class="orange">★</span><span class="black">★★★★</span>';
+      default:
+        return '<span class="black">★★★★★</span>';
     }
   }
 
@@ -60,11 +60,11 @@ const bookmarkList = (function() {
     } else {
       return '<h1>Bookmarks</h1>';
     }
-    
   }
 
   function generateListFormHtml(filter) {
     return `
+      <label for="rating-filter" name="minimum rating" class="hidden">Rating filter</label>
       <select name="rating-filter" id="rating-filter" class="rating-filter">
         <option value="0" ${filter === 0 ? 'selected="true"' : ''}>Minimum Rating</option>
         <option value="5" ${filter === 5 ? 'selected="true"' : ''}>5</option>
@@ -73,6 +73,7 @@ const bookmarkList = (function() {
         <option value="2" ${filter === 2 ? 'selected="true"' : ''}>2</option>
         <option value="1" ${filter === 1 ? 'selected="true"' : ''}>1</option>
       </select>
+      
       <button class="add-bookmark">Add Bookmark</button>
     `;
   }
@@ -195,7 +196,7 @@ const bookmarkList = (function() {
   function handleRemoveButtonClicked() {
     $('.bookmark-list').on('click', '.bookmark-delete', function(e) {
       e.stopPropagation();
-      const id = $(this).parent().attr('data-id');
+      const id = $(this).closest('.bookmark-list-item').attr('data-id');
       api.deleteBookmark(id, function() {
         store.findAndDelete(id);
         render();
@@ -226,7 +227,7 @@ const bookmarkList = (function() {
   function handleEditBookmarkButtonClicked() {
     $('.bookmark-list').on('click', '.bookmark-edit', function(e) {
       e.stopPropagation();
-      const id = $(this).parent().attr('data-id');
+      const id = $(this).closest('.bookmark-list-item').attr('data-id');
       store.setEditing(id);
       render();
     });
