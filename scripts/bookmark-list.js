@@ -170,8 +170,10 @@ const bookmarkList = (function() {
     $('header').html(headerHtml);
     $('aside').html(errorMessageHtml);
     $('.options').html(listFormHtml);
-    $('.modify-list').html(modifyListHtml);
     $('.bookmark-list').html(listHtml);
+    if (!store.error) {
+      $('.modify-list').html(modifyListHtml);
+    }
   }
 
   function handleListItemClicked() {
