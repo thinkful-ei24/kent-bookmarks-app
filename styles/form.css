@@ -73,3 +73,65 @@ aside {
   margin: 0px;
   padding: 13px;
 }
+
+.modify-list {
+  padding: 24px;
+}
+
+.short-textfield {
+  display: block;
+  padding: 13px;
+  font-size: 17px;
+  line-height: 1.25;
+  color: #464a4c;
+  background-color: #fff;
+  width: 100%;
+  height: 43px;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  margin-bottom: 8px;
+}
+
+.rating-input {
+  width: 100%;
+  height: 43px;
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.large-textfield {
+  font-family: "Roboto", sans-serif;
+  padding: 13px;
+  font-size: 17px;
+  width: 100%;
+  min-height: 200px;
+}
+
+/* <label for="bookmark-title" class="hidden">Title</label>
+<input type="text" name="title" aria-label="bookmark-title" placeholder="Title">
+<label for="bookmark-url" class="hidden">Url</label>
+<input type="text" name="url" aria-label="bookmark-url" placeholder="Website url">
+<label for="rating" id="rating" class="rating-label">Ratings</label>
+<div class="rating rating-input" role="radiogroup" aria-labelledby="rating">
+  <label>
+    <input type="radio" role="radio" name="rating" value="1"><span class="icon">★</span> 
+  </label>
+  <label>
+    <input type="radio" role="radio" name="rating" value="2"><span class="icon">★★</span>
+  </label>
+  <label>
+    <input type="radio" role="radio" name="rating" value="3"><span class="icon">★★★</span>
+  </label>
+  <label>
+    <input type="radio" role="radio" name="rating" value="4"><span class="icon">★★★★</span>
+  </label>
+  <label>
+    <input type="radio" role="radio" name="rating" value="5"><span class="icon">★★★★★</span>
+  </label>
+</div> 
+<label for="bookmark-description" class="hidden">Description</label>
+<input type="textfield" name="desc"  aria-label="bookmark-description" placeholder="Enter a description">
+<button type="submit">Add Bookmark</button>
+<button type="button" id="cancel">Cancel</button> */
