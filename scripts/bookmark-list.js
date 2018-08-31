@@ -106,7 +106,7 @@ const bookmarkList = (function() {
       </div>
       <label for="bookmark-description" class="hidden">Description</label>
       <textarea name="desc" class="bookmark-description large-textfield" aria-label="bookmark-description" placeholder="Enter a description"></textarea>
-      <button type="submit">Add Bookmark</button>
+      <button type="submit">Submit</button>
       <button type="button" id="cancel">Cancel</button>
     `;
   }
@@ -117,28 +117,29 @@ const bookmarkList = (function() {
       <input type="text" class="short-textfield" name="title" aria-label="bookmark-title" placeholder="Title" value="${editingBookmark.title}">
       <label for="bookmark-url" class="hidden">Url</label>
       <input type="text" class="short-textfield" name="url" aria-label="bookmark-url" placeholder="Website url" value="${editingBookmark.url}">
-      <label for="rating">Ratings</label>
-      <label for="rating" id="rating" class="rating hidden">Ratings</label>
-      <div class="rating" role="radiogroup" aria-labelledby="rating">
-        <label>
-          <input type="radio" role="radio" name="rating" value="1" ${editingBookmark.rating === 1 ? 'checked="checked"' : ''}><span class="icon">★</span> 
-        </label>
-        <label>
-          <input type="radio" role="radio" name="rating" value="2" ${editingBookmark.rating === 2 ? 'checked="checked"' : ''}><span class="icon">★★</span>
-        </label>
-        <label>
-          <input type="radio" role="radio" name="rating" value="3" ${editingBookmark.rating === 3 ? 'checked="checked"' : ''}><span class="icon">★★★</span>
-        </label>
-        <label>
-          <input type="radio" role="radio" name="rating" value="4" ${editingBookmark.rating === 4 ? 'checked="checked"' : ''}><span class="icon">★★★★</span>
-        </label>
-        <label>
-          <input type="radio" role="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span>
-        </label>
+      <div class=rating-input>
+        <label for="rating" id="rating" class="rating hidden">Ratings</label>
+        <div class="rating" role="radiogroup" aria-labelledby="rating">
+          <label>
+            <input type="radio" role="radio" name="rating" value="1" ${editingBookmark.rating === 1 ? 'checked="checked"' : ''}><span class="icon">★</span> 
+          </label>
+          <label>
+            <input type="radio" role="radio" name="rating" value="2" ${editingBookmark.rating === 2 ? 'checked="checked"' : ''}><span class="icon">★★</span>
+          </label>
+          <label>
+            <input type="radio" role="radio" name="rating" value="3" ${editingBookmark.rating === 3 ? 'checked="checked"' : ''}><span class="icon">★★★</span>
+          </label>
+          <label>
+            <input type="radio" role="radio" name="rating" value="4" ${editingBookmark.rating === 4 ? 'checked="checked"' : ''}><span class="icon">★★★★</span>
+          </label>
+          <label>
+            <input type="radio" role="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span>
+          </label>
+        </div>
       </div>
       <label for="bookmark-description" class="hidden">Description</label>
       <textarea name="desc" class="bookmark-description large-textfield" aria-label="bookmark-description" placeholder="Enter a description">${editingBookmark.desc}</textarea>
-      <button type="submit">Edit Bookmark</button>
+      <button type="submit" class="bookmark-submit">Submit</button>
       <button type="button" id="cancel">Cancel</button>
       <button type="button" id="delete">Delete</button>
     `;
