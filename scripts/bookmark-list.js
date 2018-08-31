@@ -80,9 +80,9 @@ const bookmarkList = (function() {
 
   function generateAddListHtml() {
     return `
-      <label for="bookmark-title">Title</label>
+      <label for="bookmark-title" class="hidden">Title</label>
       <input type="text" name="title" aria-label="bookmark-title" placeholder="Title">
-      <label for="bookmark-url">Url</label>
+      <label for="bookmark-url" class="hidden">Url</label>
       <input type="text" name="url" aria-label="bookmark-url" placeholder="Website url">
       <label for="rating" id="rating" class="rating">Ratings</label>
       <div class="rating" role="radiogroup" aria-labelledby="rating">
@@ -102,7 +102,7 @@ const bookmarkList = (function() {
           <input type="radio" role="radio" name="rating" value="5"><span class="icon">★★★★★</span>
         </label>
       </div> 
-      <label for="bookmark-description">Description</label>
+      <label for="bookmark-description" class="hidden">Description</label>
       <input type="textfield" name="desc"  aria-label="bookmark-description" placeholder="Enter a description">
       <button type="submit">Add Bookmark</button>
       <button type="button" id="cancel">Cancel</button>
@@ -111,9 +111,9 @@ const bookmarkList = (function() {
 
   function generateEditListHtml(editingBookmark) {
     return `
-      <label for="bookmark-title">Title</label>
+      <label for="bookmark-title" class="hidden">Title</label>
       <input type="text" name="title" aria-label="bookmark-title" placeholder="Title" value="${editingBookmark.title}">
-      <label for="bookmark-url">Url</label>
+      <label for="bookmark-url" class="hidden">Url</label>
       <input type="text" name="url" aria-label="bookmark-url" placeholder="Website url" value="${editingBookmark.url}">
       <label for="rating">Ratings</label>
       <label for="rating" id="rating" class="rating">Ratings</label>
@@ -134,14 +134,13 @@ const bookmarkList = (function() {
           <input type="radio" role="radio" name="rating" value="5" ${editingBookmark.rating === 5 ? 'checked="checked"' : ''}><span class="icon">★★★★★</span>
         </label>
       </div>
-      <label for="bookmark-description">Description</label>
+      <label for="bookmark-description" class="hidden">Description</label>
       <input type="textfield" name="desc"  aria-label="bookmark-description" placeholder="Enter a description" value="${editingBookmark.desc}">
       <button type="submit">Edit Bookmark</button>
       <button type="button" id="cancel">Cancel</button>
       <button type="button" id="delete">Delete</button>
     `;
   }
-
 
   function generateErrorMessageHtml() {
     return `<h2 class="error-message">${store.error}</h2>`;
