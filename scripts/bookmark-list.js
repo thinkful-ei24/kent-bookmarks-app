@@ -21,8 +21,8 @@ const bookmarkList = (function() {
         <a href="#" role="button">
           <h2 class="bookmark-title">${bookmark.title}</h2>
           <span class="bookmark-rating" aria-label="${bookmark.rating} star rating">${bookmarkRating}</span>
-          ${expanded}
         </a>
+        ${expanded}
       </li>
     `;
   }
@@ -157,7 +157,7 @@ const bookmarkList = (function() {
 
     const filteredList = store.list.filter(bookmark => bookmark.rating >= store.filter);
     const listHtml = store.adding || store.editing ? '' : filteredList.map(generateBookmarkElement).join('');
-    
+
     $('header').html(headerHtml);
     $('aside').html(errorMessageHtml);
     $('.options').html(listFormHtml);
