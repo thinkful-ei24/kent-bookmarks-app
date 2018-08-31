@@ -1,26 +1,26 @@
 /* global store api */
 //eslint-disable-next-line no-unused-vars
 const bookmarkList = (function() {
-  function generateCollapsedBookmarkElement(bookmark, bookmarkRating) {
-    return `
-      <li class="bookmark-list-item" data-id="${bookmark.id}">
-        <h2 class="bookmark-title">${bookmark.title}</h2>
-        <span class="bookmark-rating">${bookmarkRating}</span>
-      </li>
-    `;
-  }
-
-  function generateExpandedBookmarkElement(bookmark, bookmarkRating) {
-    return `
-      <li class="bookmark-list-item" data-id="${bookmark.id}">
-        <h2 class="bookmark-title">${bookmark.title}</h2>
-        <span class="bookmark-rating">${bookmarkRating}</span>
+  function generateBookmarkElement(bookmark) {
+    const bookmarkRating = generateBookmarkRatingText(bookmark.rating);
+    let expanded = '';
+    
+    if (bookmark.id === store.expanded) {
+      expanded =`
         <p class="bookmark-description">${bookmark.desc}</p>
         <p>Visit Website: <a class="bookmark-visit" aria-label="Visit Website" href="${bookmark.url}">${bookmark.url}</a></p>
         <div class="bookmark-buttons">
           <button class="bookmark-edit">Edit</button>
           <button class="bookmark-delete">Delete</button>
         </div>
+      `;
+    }
+
+    return `
+      <li class="bookmark-list-item" tabindex="0" role="button" data-id="${bookmark.id}">
+        <h2 class="bookmark-title">${bookmark.title}</h2>
+        <span class="bookmark-rating">${bookmarkRating}</span>
+        ${expanded}
       </li>
     `;
   }
@@ -39,16 +39,6 @@ const bookmarkList = (function() {
         return '<span class="orange">★</span><span class="black">★★★★</span>';
       default:
         return '<span class="black">★★★★★</span>';
-    }
-  }
-
-  function generateBookmarkElement(bookmark) {
-    const bookmarkRating = generateBookmarkRatingText(bookmark.rating);
-    
-    if (bookmark.id === store.expanded) {
-      return generateExpandedBookmarkElement(bookmark, bookmarkRating);
-    } else {
-      return generateCollapsedBookmarkElement(bookmark, bookmarkRating);
     }
   }
 
@@ -106,7 +96,7 @@ const bookmarkList = (function() {
       </div>
       <label for="bookmark-description" class="hidden">Description</label>
       <textarea name="desc" class="bookmark-description large-textfield" aria-label="bookmark-description" placeholder="Enter a description"></textarea>
-      <button type="submit">Submit</button>
+      <button type="submit" class="bookmark-submit">Submit</button>
       <button type="button" id="cancel">Cancel</button>
     `;
   }
@@ -141,7 +131,7 @@ const bookmarkList = (function() {
       <textarea name="desc" class="bookmark-description large-textfield" aria-label="bookmark-description" placeholder="Enter a description">${editingBookmark.desc}</textarea>
       <button type="submit" class="bookmark-submit">Submit</button>
       <button type="button" id="cancel">Cancel</button>
-      <button type="button" id="delete">Delete</button>
+      <button type="button" id="delete" class="modify-list-delete">Delete</button>
     `;
   }
 

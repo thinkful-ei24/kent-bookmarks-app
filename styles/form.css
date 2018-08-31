@@ -115,7 +115,6 @@ aside {
 
 .modify-list button {
   font-family: "Roboto", sans-serif;
-  float: left;
   font-size: 14px;
   font-weight: 400;
   padding: 4px 8px;
@@ -124,17 +123,18 @@ aside {
   border-radius: 4px;
   text-align: center;
   border: 1px solid transparent;
-  margin-right: 8px;
 }
 
-.modify-list button[type="submit"] {
+.bookmark-submit {
   background-color: #008000;
   border-color: #4cae4c;
   color: #fff;
+  float: left;
+  margin-right: 8px;
   margin-left: 24px;
 }
 
-.modify-list #delete {
+.modify-list-delete {
   background-color: #d43900;
   color: #fff;
   margin-right: 24px;

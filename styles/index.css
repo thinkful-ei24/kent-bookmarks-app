@@ -2,12 +2,6 @@
   box-sizing: border-box;
 }
 
-meter {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 body {
   font-family: "Roboto", sans-serif;
   width: 100%;
@@ -63,7 +57,6 @@ h1 {
 .rating-filter {
   color: #000;
   background-color: lightgrey;
-  border: 1px solid #000;
 }
 
 .hidden {
