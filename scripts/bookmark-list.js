@@ -259,8 +259,11 @@ const bookmarkList = (function() {
         }, displayError);
       } else if (store.editing) {
         const updatedBookmark = $(this).serializeJson();
-        api.editBookmark(store.editing, updatedBookmark, function(){
-          store.findAndEdit(store.editing, JSON.parse(updatedBookmark));
+        const newParameters = (JSON.parse(updatedBookmark));
+        newParameters.rating = Number(newParameters.rating);
+        if (newParameters.desc === '') delete newParameters.desc;
+        api.editBookmark(store.editing, JSON.stringify(newParameters), function(){
+          store.findAndEdit(store.editing, newParameters);
           store.clearEditing();
           render();
         }, displayError);

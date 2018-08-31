@@ -102,6 +102,7 @@ h1 {
 .bookmark-description {
   color: #000;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
 .bookmark-buttons {
