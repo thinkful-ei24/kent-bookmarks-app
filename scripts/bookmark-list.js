@@ -150,8 +150,11 @@ const bookmarkList = (function() {
     let errorMessage = '';
     if (store.error) errorMessage = `<h2 class="error-message">${store.error}</h2>`;
     
+    let successMessage = '';
+    if (store.success) successMessage = `<div class="hidden">${store.success}</div>`;
     return `
       ${errorMessage}
+      ${successMessage}
       <div class="hidden">${pageName}</div>
     `;
   }
@@ -186,6 +189,7 @@ const bookmarkList = (function() {
       e.preventDefault();
       const id = $(this).attr('data-id');
       store.changeExpanded(id);
+      store.resetSuccess();
       render();
     });
   }
@@ -194,6 +198,7 @@ const bookmarkList = (function() {
     $('.options').on('change', '#rating-filter', function() {
       const selected = $(this).val();
       store.changeFilter(selected);
+      store.resetSuccess();
       render();
     });
   }
@@ -204,6 +209,7 @@ const bookmarkList = (function() {
       const id = $(this).closest('.bookmark-list-item').attr('data-id');
       api.deleteBookmark(id, function() {
         store.findAndDelete(id);
+        store.setSuccess('Bookmark deleted');
         render();
       });
     });
@@ -216,6 +222,7 @@ const bookmarkList = (function() {
       store.clearEditing();
       api.deleteBookmark(id, function() {
         store.findAndDelete(id);
+        store.setSuccess('Bookmark deleted');
         store.resetError();
         render();
       });
@@ -227,6 +234,7 @@ const bookmarkList = (function() {
       e.preventDefault();
       store.toggleAdding();
       store.changeExpanded(null);
+      store.resetSuccess();
       store.resetError();
       render();
     });
@@ -238,6 +246,7 @@ const bookmarkList = (function() {
       const id = $(this).closest('.bookmark-list-item').attr('data-id');
       store.setEditing(id);
       store.changeExpanded(null);
+      store.resetSuccess();
       store.resetError();
       render();
     });
@@ -253,6 +262,7 @@ const bookmarkList = (function() {
     $('.modify-list').on('click', '#cancel', function() {
       if (store.editing) store.clearEditing();
       if (store.adding) store.toggleAdding();
+      store.resetSuccess();
       store.resetError();
       render();
     });
@@ -272,6 +282,7 @@ const bookmarkList = (function() {
         api.addBookmark(newBookmark, function(response) {
           store.addBookmark(response);
           store.toggleAdding();
+          store.setSuccess('Bookmark added');
           store.resetError();
           render();
         }, displayError);
@@ -283,6 +294,7 @@ const bookmarkList = (function() {
         api.editBookmark(store.editing, JSON.stringify(newParameters), function(){
           store.findAndEdit(store.editing, newParameters);
           store.clearEditing();
+          store.setSuccess('Bookmark edited');
           store.resetError();
           render();
         }, displayError);

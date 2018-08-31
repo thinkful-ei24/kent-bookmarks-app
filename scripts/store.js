@@ -40,6 +40,14 @@ const store = (function() {
     this.error = null;
   };
 
+  const setSuccess = function(successMessage) {
+    this.success = successMessage;
+  };
+
+  const resetSuccess = function() {
+    this.success = null;
+  };
+
   const findAndEdit = function(id, newProperties) {
     const oldBookmark = this.findBookmark(id);
     Object.assign(oldBookmark, newProperties);
@@ -56,6 +64,7 @@ const store = (function() {
     expanded: null,
     filter: 0,
     error: null,
+    success: null,
 
     addBookmark,
     changeExpanded,
@@ -65,6 +74,8 @@ const store = (function() {
     setEditing,
     setError,
     resetError,
+    setSuccess,
+    resetSuccess,
     findBookmark,
     findAndEdit,
     clearEditing
